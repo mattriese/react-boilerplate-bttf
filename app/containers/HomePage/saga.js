@@ -33,17 +33,6 @@ export function* getRepos() {
 }
 
 /**
- * Root saga manages watcher lifecycle
- */
-export default function* githubData() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
-  // By using `takeLatest` only the result of the latest API call is applied.
-  // It returns task descriptor (just like fork) so we can continue execution
-  // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_REPOS, getRepos);
-}
-
-/**
  * Github repos request/response handler
  */
 export function* requestGetQuotes() {
@@ -55,7 +44,7 @@ export function* requestGetQuotes() {
     const quotes = yield call(request, requestURL);
     console.log('quotes after api call====', quotes);
     // const quotes = ['oops', 'scott', 'Marty', 'this', 'heavy'];
-    yield put(quotesLoaded(quotes));
+    yield put(quotesLoaded(quotes.quotes));
   } catch (err) {
     yield put(repoLoadingError(err));
   }
@@ -64,11 +53,11 @@ export function* requestGetQuotes() {
 /**
  * Root saga manages watcher lifecycle
  */
-export function* getQuotes() {
-  console.log('getQuote in sagaQ ran');
+export default function* githubData() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(GET_QUOTES, requestGetQuotes);
+  yield takeLatest(LOAD_REPOS, getRepos);
 }
