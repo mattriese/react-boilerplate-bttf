@@ -11,7 +11,11 @@ const selectGlobal = state => state.global || initialState;
 
 const selectRouter = state => state.router;
 
-// const makeSelectQuotes = () => createSelector(selectQuotes);
+const makeSelectQuotes = () =>
+  createSelector(
+    selectGlobal,
+    globalState => globalState.quotes,
+  );
 
 const makeSelectCurrentUser = () =>
   createSelector(
@@ -50,4 +54,5 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocation,
+  makeSelectQuotes,
 };

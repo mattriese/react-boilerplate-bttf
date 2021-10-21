@@ -18,6 +18,7 @@ import {
   makeSelectRepos,
   makeSelectLoading,
   makeSelectError,
+  makeSelectQuotes,
 } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
@@ -27,7 +28,7 @@ import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos } from '../App/actions';
+import { loadRepos, getQuotes } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
@@ -40,12 +41,13 @@ export function HomePage({
   username,
   loading,
   error,
-  repos,
   onSubmitForm,
   onChangeUsername,
+  populateQuotesList,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
+  // useInjectSaga({ key, sagaQ });
 
   console.log('quotes in homepage (props) ===--===', quotes);
 
@@ -54,11 +56,17 @@ export function HomePage({
     if (username && username.trim().length > 0) onSubmitForm();
   }, []);
 
+  useEffect(() => {
+    console.log('populate useEffect ran');
+    populateQuotesList();
+  }, []);
+
   const reposListProps = {
     loading,
     error,
-    repos,
+    quotes,
   };
+  console.log('reposListProps in homepage/index0000000', reposListProps);
 
   return (
     <article>
@@ -112,6 +120,7 @@ HomePage.propTypes = {
   onSubmitForm: PropTypes.func,
   username: PropTypes.string,
   onChangeUsername: PropTypes.func,
+  populateQuotesList: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -119,6 +128,7 @@ const mapStateToProps = createStructuredSelector({
   username: makeSelectUsername(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  quotes: makeSelectQuotes(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -128,6 +138,7 @@ export function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadRepos());
     },
+    populateQuotesList: () => dispatch(getQuotes()),
   };
 }
 

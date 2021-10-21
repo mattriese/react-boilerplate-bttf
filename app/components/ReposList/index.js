@@ -6,7 +6,8 @@ import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import RepoListItem from 'containers/RepoListItem';
 
-function ReposList({ loading, error, repos }) {
+function ReposList({ loading, error, quotes }) {
+  console.log('repos in Repos list (prop)=-=-=', quotes);
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -18,8 +19,8 @@ function ReposList({ loading, error, repos }) {
     return <List component={ErrorComponent} />;
   }
 
-  if (repos !== false) {
-    return <List items={repos} component={RepoListItem} />;
+  if (quotes !== false) {
+    return <List items={quotes} component={RepoListItem} />;
   }
 
   return null;
@@ -28,7 +29,7 @@ function ReposList({ loading, error, repos }) {
 ReposList.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
-  repos: PropTypes.any,
+  quotes: PropTypes.array,
 };
 
 export default ReposList;

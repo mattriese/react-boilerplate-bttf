@@ -15,7 +15,50 @@
  *    }
  */
 
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from './constants';
+import {
+  GET_QUOTES,
+  ADD_QUOTE,
+  LOAD_QUOTES_SUCCESS,
+  LOAD_REPOS,
+  LOAD_REPOS_SUCCESS,
+  LOAD_REPOS_ERROR,
+} from './constants';
+
+/**
+ * Add new quote to quote list Dispatched from component to watcher saga
+ *
+ * @returns {object} an object with a type of ADD_QUOTE
+ */
+export function addQuote(quote) {
+  return {
+    type: ADD_QUOTE,
+    quote,
+  };
+}
+
+/**
+ * Dispatched by worker saga after api loads default quotes
+ * @returns {object}      An action object with a type of ??? passing the quotes
+ */
+export function getQuotes() {
+  return {
+    type: GET_QUOTES,
+  };
+}
+
+/**
+ * Dispatched when the quotes are loaded by the request saga
+ *
+ * @param  {array} quotes The quotes data
+ *
+ * @return {object}      An action object with a type of LOAD_REPOS_SUCCESS passing the repos
+ */
+export function quotesLoaded(quotes) {
+  return {
+    type: LOAD_QUOTES_SUCCESS,
+    quotes,
+  };
+}
 
 /**
  * Load the repositories, this action starts the request saga
