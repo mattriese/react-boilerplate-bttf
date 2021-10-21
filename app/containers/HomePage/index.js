@@ -36,6 +36,7 @@ import saga from './saga';
 const key = 'home';
 
 export function HomePage({
+  quotes,
   username,
   loading,
   error,
@@ -45,6 +46,8 @@ export function HomePage({
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
+
+  console.log('quotes in homepage (props) ===--===', quotes);
 
   useEffect(() => {
     // When initial state username is not null, submit the form to load repos
