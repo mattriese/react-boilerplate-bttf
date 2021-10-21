@@ -5,13 +5,13 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectQuotes = state => state.quotes;
+// const selectQuotes = state => state.quotes;
 
 const selectGlobal = state => state.global || initialState;
 
 const selectRouter = state => state.router;
 
-const makeSelectQuotes = () => createSelector(selectQuotes);
+// const makeSelectQuotes = () => createSelector(selectQuotes);
 
 const makeSelectCurrentUser = () =>
   createSelector(
@@ -50,5 +50,4 @@ export {
   makeSelectError,
   makeSelectRepos,
   makeSelectLocation,
-  makeSelectQuotes,
 };

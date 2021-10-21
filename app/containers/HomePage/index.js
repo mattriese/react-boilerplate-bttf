@@ -102,6 +102,7 @@ export function HomePage({
 }
 
 HomePage.propTypes = {
+  quotes: PropTypes.array,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),

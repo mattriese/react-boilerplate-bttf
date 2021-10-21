@@ -12,7 +12,6 @@ import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
 
 // The initial state of the App
 export const initialState = {
-  quotes: ['great', 'scott', 'Marty', 'this', 'heavy'],
   loading: false,
   error: false,
   currentUser: false,
@@ -32,7 +31,7 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case LOAD_REPOS_SUCCESS:
-        draft.userData.repositories = action.repos;
+        draft.quotes = action.repos.quotes;
         draft.loading = false;
         draft.currentUser = action.username;
         break;
