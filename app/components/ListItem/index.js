@@ -7,13 +7,13 @@ import Wrapper from './Wrapper';
 function ListItem(props) {
   return (
     <Wrapper>
-      <Item>{props.item}</Item>
+      <Item>{props.quote}</Item>
     </Wrapper>
   );
 }
 
 ListItem.propTypes = {
-  item: PropTypes.any,
+  quote: PropTypes.object,
 };
 
 export default ListItem;

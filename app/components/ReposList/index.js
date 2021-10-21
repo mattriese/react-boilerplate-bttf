@@ -7,7 +7,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import RepoListItem from 'containers/RepoListItem';
 
 function ReposList({ loading, error, quotes }) {
-  console.log('repos in Repos list (prop)=-=-=', quotes);
+  console.log('quotes in Repos list (prop)=-=-=', quotes);
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -20,7 +20,7 @@ function ReposList({ loading, error, quotes }) {
   }
 
   if (quotes !== false) {
-    return <List items={quotes} component={RepoListItem} />;
+    return <List quotes={quotes} component={RepoListItem} />;
   }
 
   return null;

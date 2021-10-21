@@ -3,7 +3,7 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_REPOS, GET_QUOTES } from 'containers/App/constants';
+import { ADD_QUOTE, GET_QUOTES } from 'containers/App/constants';
 import {
   reposLoaded,
   repoLoadingError,
@@ -11,39 +11,46 @@ import {
 } from 'containers/App/actions';
 
 import request from 'utils/request';
+// import { ADD_QUOTE } from '../App/constants';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
 
 /**
  * Github repos request/response handler
  */
-export function* getRepos() {
+export function* requestAddQuote() {
   // Select username from store
   const username = yield select(makeSelectUsername());
+  const newQuote = username;
   const requestURL = `http://localhost:3001/quotes`;
-
+  console.log('requestAddQuote ran, newQuote .........', newQuote);
   try {
     // Call our request helper (see 'utils/request')
-    const repos = yield call(request, requestURL);
-    console.log('repos after api call====', repos);
+    const req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ newQuote }),
+    };
+    const quotes = yield call(request, requestURL, req);
+    console.log('quotes.quotes after POST req====', quotes.quotes);
     // const repos = ['oops', 'scott', 'Marty', 'this', 'heavy'];
-    yield put(reposLoaded(repos, username));
+    yield put(reposLoaded(quotes.quotes, username));
   } catch (err) {
     yield put(repoLoadingError(err));
   }
 }
 
 /**
- * Github repos request/response handler
+ * Get initial quotes list from backend and send to store
  */
 export function* requestGetQuotes() {
-  // Select username from store
   const requestURL = `http://localhost:3001/quotes`;
 
   try {
     // Call our request helper (see 'utils/request')
     const quotes = yield call(request, requestURL);
     console.log('quotes after api call====', quotes);
-    // const quotes = ['oops', 'scott', 'Marty', 'this', 'heavy'];
     yield put(quotesLoaded(quotes.quotes));
   } catch (err) {
     yield put(repoLoadingError(err));
@@ -59,5 +66,5 @@ export default function* githubData() {
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
   yield takeLatest(GET_QUOTES, requestGetQuotes);
-  yield takeLatest(LOAD_REPOS, getRepos);
+  yield takeLatest(ADD_QUOTE, requestAddQuote);
 }

@@ -12,24 +12,25 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectCurrentUser } from 'containers/App/selectors';
 import ListItem from 'components/ListItem';
 import Wrapper from './Wrapper';
+const uuidv4 = require('uuid/v4');
 
 export function RepoListItem(props) {
-  const { item } = props;
-  console.log('item in RepoListItem:  ----- ', item);
+  const { quote } = props;
+  console.log('quote in RepoListItem:  ----- ', quote);
 
   // Put together the content of the repository
   const content = (
     <Wrapper>
-      <p>{item}</p>
+      <p>{quote}</p>
     </Wrapper>
   );
 
   // Render the content into a list item
-  return <ListItem key={`repo-list-item-${item}`} item={content} />;
+  return <ListItem key={`repo-list-item-${uuidv4()}`} quote={content} />;
 }
 
 RepoListItem.propTypes = {
-  item: PropTypes.string,
+  quote: PropTypes.string,
 };
 
 export default connect(

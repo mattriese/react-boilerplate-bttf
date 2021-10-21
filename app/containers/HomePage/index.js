@@ -28,7 +28,7 @@ import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos, getQuotes } from '../App/actions';
+import { addQuote, getQuotes } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 import reducer from './reducer';
@@ -47,12 +47,13 @@ export function HomePage({
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
-  // useInjectSaga({ key, sagaQ });
 
-  console.log('quotes in homepage (props) ===--===', quotes);
+  // console.log('quotes in homepage (props) ===--===', quotes);
 
   useEffect(() => {
+    console.log('XXXXXXXXX onsubmit useEffect ran');
     // When initial state username is not null, submit the form to load repos
+    console.log('username in useEffect===================', username);
     if (username && username.trim().length > 0) onSubmitForm();
   }, []);
 
@@ -66,7 +67,7 @@ export function HomePage({
     error,
     quotes,
   };
-  console.log('reposListProps in homepage/index0000000', reposListProps);
+  // console.log('reposListProps in homepage/index0000000', reposListProps);
 
   return (
     <article>
@@ -136,7 +137,9 @@ export function mapDispatchToProps(dispatch) {
     onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
+      // console.log('evt.target.value===', evt.target.value);
+      // console.log('username in onsubmitform===', username);
+      dispatch(addQuote());
     },
     populateQuotesList: () => dispatch(getQuotes()),
   };
