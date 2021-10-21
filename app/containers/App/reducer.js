@@ -12,6 +12,7 @@ import { LOAD_REPOS_SUCCESS, LOAD_REPOS, LOAD_REPOS_ERROR } from './constants';
 
 // The initial state of the App
 export const initialState = {
+  quotes: ['great', 'scott', 'Marty', 'this', 'heavy'],
   loading: false,
   error: false,
   currentUser: false,
