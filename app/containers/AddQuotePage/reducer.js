@@ -1,5 +1,5 @@
 /*
- * HomeReducer
+ * addQuoteReducer
  *
  * The reducer takes care of our data. Using actions, we can
  * update our application state. To add a new action,
@@ -16,12 +16,11 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const homeReducer = (state = initialState, action) =>
+const addQuoteReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CHANGE_NEWQUOTE:
-        // Delete prefixed '@' from the github newQuote
-        draft.newQuote = action.newQuote.replace(/@/gi, '');
+        draft.newQuote = action.newQuote;
         break;
       case RESET_NEWQUOTE:
         draft.newQuote = '';
@@ -29,4 +28,4 @@ const homeReducer = (state = initialState, action) =>
     }
   });
 
-export default homeReducer;
+export default addQuoteReducer;

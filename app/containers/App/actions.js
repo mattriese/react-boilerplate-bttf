@@ -30,10 +30,8 @@ import {
  * @returns {object} an object with a type of ADD_QUOTE
  */
 export function addQuote() {
-  // console.log('newQuote in addQuote ACTION-====---===', newQuote);
   return {
     type: ADD_QUOTE,
-    // newQuote,
   };
 }
 

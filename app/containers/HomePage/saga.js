@@ -4,11 +4,7 @@
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { ADD_QUOTE, GET_QUOTES } from 'containers/App/constants';
-import {
-  reposLoaded,
-  repoLoadingError,
-  quotesLoaded,
-} from 'containers/App/actions';
+import { repoLoadingError, quotesLoaded } from 'containers/App/actions';
 
 import request from 'utils/request';
 import { makeSelectNewQuote } from 'containers/HomePage/selectors';
@@ -35,7 +31,7 @@ export function* requestAddQuote() {
       };
       const quotes = yield call(request, REQUEST_URL, req);
       // console.log('quotes.quotes after POST req====', quotes.quotes);
-      yield put(reposLoaded(quotes.quotes, newQuote));
+      yield put(quotesLoaded(quotes.quotes));
       yield put(resetNewQuote());
     } catch (err) {
       yield put(repoLoadingError(err));

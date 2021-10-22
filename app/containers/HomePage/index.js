@@ -14,7 +14,6 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  // makeSelectRepos,
   makeSelectLoading,
   makeSelectError,
   makeSelectQuotes,
@@ -24,7 +23,7 @@ import CenteredSection from './CenteredSection';
 import Section from './Section';
 import { getQuotes } from '../App/actions';
 import { makeSelectNewQuote } from '../AddQuotePage/selectors';
-import reducer from './reducer';
+import reducer from '../AddQuotePage/reducer';
 import saga from './saga';
 
 const key = 'home';
@@ -75,7 +74,6 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  // repos: makeSelectRepos(),
   newQuote: makeSelectNewQuote(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
