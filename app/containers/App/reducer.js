@@ -17,6 +17,7 @@ import {
 
 // The initial state of the App
 export const initialState = {
+  currentPage: '',
   loading: false,
   error: false,
   currentUser: false,

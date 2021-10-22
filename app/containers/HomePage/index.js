@@ -83,7 +83,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export function mapDispatchToProps(dispatch) {
-  return { populateQuotesList: () => dispatch(getQuotes()) };
+  return {
+    populateQuotesList: () => dispatch(getQuotes()),
+  };
 }
 
 const withConnect = connect(
