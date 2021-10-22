@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
-import RepoListItem from 'containers/RepoListItem';
+import QuoteListItem from 'containers/QuoteListItem';
 
-function ReposList({ loading, error, quotes }) {
+function QuotesList({ loading, error, quotes }) {
   console.log('quotes in Repos list (prop)=-=-=', quotes);
   console.log('loading in Repos list (prop)=-=-=', loading);
   console.log('error in Repos list (prop)=-=-=', error);
@@ -22,16 +22,16 @@ function ReposList({ loading, error, quotes }) {
   }
 
   if (quotes !== false) {
-    return <List quotes={quotes} component={RepoListItem} />;
+    return <List quotes={quotes} component={QuoteListItem} />;
   }
 
   return null;
 }
 
-ReposList.propTypes = {
+QuotesList.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
   quotes: PropTypes.array,
 };
 
-export default ReposList;
+export default QuotesList;

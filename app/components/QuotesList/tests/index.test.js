@@ -4,19 +4,19 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 import { render } from 'react-testing-library';
 
-import ReposList from '../index';
+import QuotesList from '../index';
 import configureStore from '../../../configureStore';
 
-describe('<ReposList />', () => {
+describe('<QuotesList />', () => {
   it('should render the loading indicator when its loading', () => {
-    const { container } = render(<ReposList loading />);
+    const { container } = render(<QuotesList loading />);
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it('should render an error if loading failed', () => {
     const { queryByText } = render(
       <IntlProvider locale="en">
-        <ReposList loading={false} error={{ message: 'Loading failed!' }} />
+        <QuotesList loading={false} error={{ message: 'Loading failed!' }} />
       </IntlProvider>,
     );
     expect(queryByText(/Something went wrong/)).not.toBeNull();
@@ -41,7 +41,7 @@ describe('<ReposList />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale="en">
-          <ReposList repos={repos} error={false} />
+          <QuotesList repos={repos} error={false} />
         </IntlProvider>
       </Provider>,
     );
@@ -51,7 +51,7 @@ describe('<ReposList />', () => {
 
   it('should not render anything if nothing interesting is provided', () => {
     const { container } = render(
-      <ReposList repos={false} error={false} loading={false} />,
+      <QuotesList repos={false} error={false} loading={false} />,
     );
 
     expect(container.firstChild).toBeNull();

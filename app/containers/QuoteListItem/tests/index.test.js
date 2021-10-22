@@ -6,16 +6,16 @@ import React from 'react';
 import { getByText, render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 
-import { RepoListItem } from '../index';
+import { QuoteListItem } from '../index';
 
 const renderComponent = (props = {}) =>
   render(
     <IntlProvider locale="en">
-      <RepoListItem {...props} />
+      <QuoteListItem {...props} />
     </IntlProvider>,
   );
 
-describe('<RepoListItem />', () => {
+describe('<QuoteListItem />', () => {
   let item;
 
   // Before each test reset the item data for safety

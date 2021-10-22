@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ReposList /> should render the loading indicator when its loading 1`] = `
+exports[`<QuotesList /> should render the loading indicator when its loading 1`] = `
 <div
   class="Wrapper-sc-1umgotm-0 laCwDT"
 >
@@ -51,7 +51,7 @@ exports[`<ReposList /> should render the loading indicator when its loading 1`] 
 </div>
 `;
 
-exports[`<ReposList /> should render the repositories if loading was successful 1`] = `
+exports[`<QuotesList /> should render the repositories if loading was successful 1`] = `
 <div
   class="Wrapper-sc-1umgotm-0 laCwDT"
 >
@@ -68,7 +68,7 @@ exports[`<ReposList /> should render the repositories if loading was successful 
           class="Wrapper-sc-17s0rao-0 dlZQhZ"
         >
           <a
-            class="A-br8h0y-0 RepoLink-pvpwpn-0 eEveIZ"
+            class="A-br8h0y-0 QuoteLink-pvpwpn-0 eEveIZ"
             href="https://github.com/react-boilerplate/react-boilerplate"
             target="_blank"
           >

@@ -19,7 +19,7 @@ import {
   makeSelectError,
   makeSelectQuotes,
 } from 'containers/App/selectors';
-import ReposList from 'components/ReposList';
+import QuotesList from 'components/QuotesList';
 import CenteredSection from './CenteredSection';
 import Section from './Section';
 import { getQuotes } from '../App/actions';
@@ -40,12 +40,12 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
     populateQuotesList();
   }, []);
 
-  const reposListProps = {
+  const quotesListProps = {
     loading,
     error,
     quotes,
   };
-  console.log('reposListProps in homepage/index0000000', reposListProps);
+  console.log('quotesListProps in homepage/index0000000', quotesListProps);
 
   return (
     <article>
@@ -60,7 +60,7 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
           </h2>
         </CenteredSection>
         <Section>
-          <ReposList {...reposListProps} />
+          <QuotesList {...quotesListProps} />
         </Section>
       </div>
     </article>

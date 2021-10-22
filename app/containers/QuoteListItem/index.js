@@ -1,5 +1,5 @@
 /**
- * RepoListItem
+ * QuoteListItem
  *
  * Lists the name and the issue count of a repository
  */
@@ -14,9 +14,9 @@ import ListItem from 'components/ListItem';
 import Wrapper from './Wrapper';
 const uuidv4 = require('uuid/v4');
 
-export function RepoListItem(props) {
+export function QuoteListItem(props) {
   const { quote } = props;
-  console.log('quote in RepoListItem:  ----- ', quote);
+  console.log('quote in QuoteListItem:  ----- ', quote);
 
   // Put together the content of the repository
   const content = (
@@ -29,7 +29,7 @@ export function RepoListItem(props) {
   return <ListItem key={`repo-list-item-${uuidv4()}`} item={content} />;
 }
 
-RepoListItem.propTypes = {
+QuoteListItem.propTypes = {
   quote: PropTypes.string,
 };
 
@@ -37,4 +37,4 @@ export default connect(
   createStructuredSelector({
     currentUser: makeSelectCurrentUser(),
   }),
-)(RepoListItem);
+)(QuoteListItem);

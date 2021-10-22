@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RepoListItem /> should render a ListItem 1`] = `
+exports[`<QuoteListItem /> should render a ListItem 1`] = `
 <li
   class="Wrapper-euo0oy-0 jLvxtc"
 >
@@ -11,7 +11,7 @@ exports[`<RepoListItem /> should render a ListItem 1`] = `
       class="Wrapper-sc-17s0rao-0 dlZQhZ"
     >
       <a
-        class="A-br8h0y-0 RepoLink-pvpwpn-0 eEveIZ"
+        class="A-br8h0y-0 QuoteLink-pvpwpn-0 eEveIZ"
         href="https://github.com/react-boilerplate/react-boilerplate"
         target="_blank"
       >
