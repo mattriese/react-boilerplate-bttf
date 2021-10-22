@@ -3,75 +3,77 @@
  *
  * List all the features
  */
-import React from 'react';
+import React, { useEffect, memo } from 'react';
+import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
-import H1 from 'components/H1';
-import messages from './messages';
-import List from './List';
-import ListItem from './ListItem';
-import ListItemTitle from './ListItemTitle';
+import H2 from 'components/H2';
+import Form from './Form';
+import Input from './Input';
+import { addQuote } from '../App/actions';
+import { changeUsername } from './actions';
+import { makeSelectUsername } from './selectors';
 
-export default function FeaturePage() {
+export function FeaturePage({ onSubmitForm, onChangeUsername, username }) {
+  useEffect(() => {
+    console.log('XXXXXXXXX onsubmit useEffect ran');
+    // When initial state username is not null, submit the form to load repos
+    if (username && username.trim().length > 0) onSubmitForm();
+  }, []);
+
   return (
     <div>
       <Helmet>
-        <title>Feature Page</title>
-        <meta
-          name="description"
-          content="Feature page of React.js Boilerplate application"
-        />
+        <title>Add a quote to the list:</title>
+        <meta name="description" content="Submit a quote to the list" />
       </Helmet>
-      <H1>
-        <FormattedMessage {...messages.header} />
-      </H1>
-      <List>
-        <ListItem>
-          <ListItemTitle>
-            <FormattedMessage {...messages.scaffoldingHeader} />
-          </ListItemTitle>
-          <p>
-            <FormattedMessage {...messages.scaffoldingMessage} />
-          </p>
-        </ListItem>
-
-        <ListItem>
-          <ListItemTitle>
-            <FormattedMessage {...messages.feedbackHeader} />
-          </ListItemTitle>
-          <p>
-            <FormattedMessage {...messages.feedbackMessage} />
-          </p>
-        </ListItem>
-
-        <ListItem>
-          <ListItemTitle>
-            <FormattedMessage {...messages.routingHeader} />
-          </ListItemTitle>
-          <p>
-            <FormattedMessage {...messages.routingMessage} />
-          </p>
-        </ListItem>
-
-        <ListItem>
-          <ListItemTitle>
-            <FormattedMessage {...messages.networkHeader} />
-          </ListItemTitle>
-          <p>
-            <FormattedMessage {...messages.networkMessage} />
-          </p>
-        </ListItem>
-
-        <ListItem>
-          <ListItemTitle>
-            <FormattedMessage {...messages.intlHeader} />
-          </ListItemTitle>
-          <p>
-            <FormattedMessage {...messages.intlMessage} />
-          </p>
-        </ListItem>
-      </List>
+      <H2>Add a Back to the Future quote:</H2>
+      <Form onSubmit={onSubmitForm}>
+        <label htmlFor="username">
+          <Input
+            id="username"
+            type="text"
+            placeholder="This is heavy, Doc"
+            value={username}
+            onChange={onChangeUsername}
+          />
+        </label>
+      </Form>
     </div>
   );
 }
+
+FeaturePage.propTypes = {
+  onSubmitForm: PropTypes.func,
+  username: PropTypes.string,
+  onChangeUsername: PropTypes.func,
+};
+
+const mapStateToProps = createStructuredSelector({
+  username: makeSelectUsername(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
+    onSubmitForm: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      // console.log('evt.target.value===', evt.target.value);
+      // console.log('username in onsubmitform===', username);
+      dispatch(addQuote());
+    },
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  memo,
+)(FeaturePage);

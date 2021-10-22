@@ -13,6 +13,7 @@ import {
 import request from 'utils/request';
 // import { ADD_QUOTE } from '../App/constants';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
+import { resetUsername } from '../FeaturePage/actions';
 
 /**
  * Github repos request/response handler
@@ -36,6 +37,7 @@ export function* requestAddQuote() {
     console.log('quotes.quotes after POST req====', quotes.quotes);
     // const repos = ['oops', 'scott', 'Marty', 'this', 'heavy'];
     yield put(reposLoaded(quotes.quotes, username));
+    yield put(resetUsername());
   } catch (err) {
     yield put(repoLoadingError(err));
   }

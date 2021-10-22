@@ -22,40 +22,21 @@ import {
 } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
-import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
-import Form from './Form';
-import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { addQuote, getQuotes } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+import { getQuotes } from '../App/actions';
+import { makeSelectUsername } from '../FeaturePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
 
 const key = 'home';
 
-export function HomePage({
-  quotes,
-  username,
-  loading,
-  error,
-  onSubmitForm,
-  onChangeUsername,
-  populateQuotesList,
-}) {
+export function HomePage({ quotes, loading, error, populateQuotesList }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   // console.log('quotes in homepage (props) ===--===', quotes);
-
-  useEffect(() => {
-    console.log('XXXXXXXXX onsubmit useEffect ran');
-    // When initial state username is not null, submit the form to load repos
-    console.log('username in useEffect===================', username);
-    if (username && username.trim().length > 0) onSubmitForm();
-  }, []);
 
   useEffect(() => {
     console.log('populate useEffect ran');
@@ -88,24 +69,6 @@ export function HomePage({
           </p>
         </CenteredSection>
         <Section>
-          <H2>
-            <FormattedMessage {...messages.trymeHeader} />
-          </H2>
-          <Form onSubmit={onSubmitForm}>
-            <label htmlFor="username">
-              <FormattedMessage {...messages.trymeMessage} />
-              <AtPrefix>
-                <FormattedMessage {...messages.trymeAtPrefix} />
-              </AtPrefix>
-              <Input
-                id="username"
-                type="text"
-                placeholder="mxstbr"
-                value={username}
-                onChange={onChangeUsername}
-              />
-            </label>
-          </Form>
           <ReposList {...reposListProps} />
         </Section>
       </div>
@@ -117,10 +80,6 @@ HomePage.propTypes = {
   quotes: PropTypes.array,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
   populateQuotesList: PropTypes.func,
 };
 
@@ -133,16 +92,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export function mapDispatchToProps(dispatch) {
-  return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
-    onSubmitForm: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      // console.log('evt.target.value===', evt.target.value);
-      // console.log('username in onsubmitform===', username);
-      dispatch(addQuote());
-    },
-    populateQuotesList: () => dispatch(getQuotes()),
-  };
+  return { populateQuotesList: () => dispatch(getQuotes()) };
 }
 
 const withConnect = connect(

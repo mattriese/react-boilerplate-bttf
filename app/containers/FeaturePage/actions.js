@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import { CHANGE_USERNAME, RESET_USERNAME } from './constants';
 
 /**
  * Changes the input field of the form
@@ -28,5 +28,18 @@ export function changeUsername(username) {
   return {
     type: CHANGE_USERNAME,
     username,
+  };
+}
+
+/**
+ * Resets the input field of the form
+ *
+ * @param  {string} username The new text of the input field
+ *
+ * @return {object} An action object with a type of RESET_USERNAME
+ */
+export function resetUsername() {
+  return {
+    type: RESET_USERNAME,
   };
 }
