@@ -1,5 +1,5 @@
 /*
- * FeaturePage
+ * AddQuotePage
  *
  * List all the features
  */
@@ -17,7 +17,7 @@ import { addQuote } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 
-export function FeaturePage({ onSubmitForm, onChangeUsername, username }) {
+export function AddQuotePage({ onSubmitForm, onChangeUsername, username }) {
   useEffect(() => {
     console.log('XXXXXXXXX onsubmit useEffect ran');
     // When initial state username is not null, submit the form to load repos
@@ -30,7 +30,9 @@ export function FeaturePage({ onSubmitForm, onChangeUsername, username }) {
         <title>Add a quote to the list:</title>
         <meta name="description" content="Submit a quote to the list" />
       </Helmet>
-      <H2>Add a Back to the Future quote:</H2>
+      <H2>
+        Add a <i>Back to the Future</i> quote:
+      </H2>
       <Form onSubmit={onSubmitForm}>
         <label htmlFor="username">
           <Input
@@ -46,7 +48,7 @@ export function FeaturePage({ onSubmitForm, onChangeUsername, username }) {
   );
 }
 
-FeaturePage.propTypes = {
+AddQuotePage.propTypes = {
   onSubmitForm: PropTypes.func,
   username: PropTypes.string,
   onChangeUsername: PropTypes.func,
@@ -76,4 +78,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(FeaturePage);
+)(AddQuotePage);

@@ -23,7 +23,7 @@ import ReposList from 'components/ReposList';
 import CenteredSection from './CenteredSection';
 import Section from './Section';
 import { getQuotes } from '../App/actions';
-import { makeSelectUsername } from '../FeaturePage/selectors';
+import { makeSelectUsername } from '../AddQuotePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -55,7 +55,9 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
       </Helmet>
       <div>
         <CenteredSection>
-          <h2>Back to the Future quotes:</h2>
+          <h2>
+            <i>Back to the Future</i> quotes:
+          </h2>
         </CenteredSection>
         <Section>
           <ReposList {...reposListProps} />

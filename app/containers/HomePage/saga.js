@@ -13,7 +13,7 @@ import {
 import request from 'utils/request';
 // import { ADD_QUOTE } from '../App/constants';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
-import { resetUsername } from '../FeaturePage/actions';
+import { resetUsername } from '../AddQuotePage/actions';
 
 /**
  * Github repos request/response handler

@@ -1,11 +1,11 @@
 /*
- * FeaturePage Messages
+ * AddQuotePage Messages
  *
- * This contains all the text for the FeaturePage component.
+ * This contains all the text for the AddQuotePage component.
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'boilerplate.containers.FeaturePage';
+export const scope = 'boilerplate.containers.AddQuotePage';
 
 export default defineMessages({
   header: {
