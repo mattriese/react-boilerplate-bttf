@@ -3,6 +3,7 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 import { ADD_QUOTE, GET_QUOTES } from 'containers/App/constants';
 import { quoteLoadingError, quotesLoaded } from 'containers/App/actions';
 
@@ -31,6 +32,7 @@ export function* requestAddQuote() {
       const quotes = yield call(request, REQUEST_URL, req);
       yield put(quotesLoaded(quotes.quotes));
       yield put(resetNewQuote());
+      yield put(push('/'));
     } catch (err) {
       yield put(quoteLoadingError(err));
     }
