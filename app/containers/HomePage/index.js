@@ -30,7 +30,7 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
   useInjectSaga({ key, saga });
 
   useEffect(() => {
-    populateQuotesList();
+    if (!quotes || quotes.length === 0) populateQuotesList();
   }, []);
 
   const quotesListProps = {
