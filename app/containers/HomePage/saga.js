@@ -1,5 +1,5 @@
 /**
- * Gets the repositories of the user from Github
+ * Gets the list of quotes from the server
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
@@ -11,18 +11,18 @@ import {
 } from 'containers/App/actions';
 
 import request from 'utils/request';
-// import { ADD_QUOTE } from '../App/constants';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
 import { resetUsername } from '../AddQuotePage/actions';
 
+const REQUEST_URL = `http://localhost:3001/quotes`;
 /**
- * Github repos request/response handler
+ * Quotes request/response handler
  */
 export function* requestAddQuote() {
   // Select username from store
   const username = yield select(makeSelectUsername());
   const newQuote = username;
-  const requestURL = `http://localhost:3001/quotes`;
+
   // console.log('requestAddQuote ran, newQuote .........', newQuote);
   if (newQuote && newQuote.trim().length > 0) {
     try {
@@ -34,7 +34,7 @@ export function* requestAddQuote() {
         },
         body: JSON.stringify({ newQuote }),
       };
-      const quotes = yield call(request, requestURL, req);
+      const quotes = yield call(request, REQUEST_URL, req);
       // console.log('quotes.quotes after POST req====', quotes.quotes);
       yield put(reposLoaded(quotes.quotes, username));
       yield put(resetUsername());
@@ -45,14 +45,12 @@ export function* requestAddQuote() {
 }
 
 /**
- * Get initial quotes list from backend and send to store
+ * Get current quotes list from backend and send to store
  */
 export function* requestGetQuotes() {
-  const requestURL = `http://localhost:3001/quotes`;
-
   try {
     // Call our request helper (see 'utils/request')
-    const quotes = yield call(request, requestURL);
+    const quotes = yield call(request, REQUEST_URL);
     console.log('quotes after api call====', quotes);
     yield put(quotesLoaded(quotes.quotes));
   } catch (err) {
@@ -63,7 +61,7 @@ export function* requestGetQuotes() {
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* rootSaga() {
+export default function* watcherSaga() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
