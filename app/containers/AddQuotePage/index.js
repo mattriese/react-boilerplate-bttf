@@ -10,14 +10,19 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
+import { useInjectReducer } from 'utils/injectReducer';
 import H2 from 'components/H2';
 import Form from './Form';
 import Input from './Input';
 import { addQuote } from '../App/actions';
 import { changeNewQuote } from './actions';
 import { makeSelectNewQuote } from './selectors';
+import reducer from './reducer';
+
+const key = 'AddQuote';
 
 export function AddQuotePage({ onSubmitForm, onChangeNewQuote, newQuote }) {
+  useInjectReducer({ key, reducer });
   return (
     <div>
       <Helmet>

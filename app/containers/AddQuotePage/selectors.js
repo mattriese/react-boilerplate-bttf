@@ -1,16 +1,16 @@
 /**
- * Homepage selectors
+ * AddQuotePage selectors
  */
 
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectHome = state => state.home || initialState;
+const selectAddQuote = state => state.AddQuote || initialState;
 
 const makeSelectNewQuote = () =>
   createSelector(
-    selectHome,
-    homeState => homeState.newQuote,
+    selectAddQuote,
+    AddQuoteState => AddQuoteState.newQuote,
   );
 
-export { selectHome, makeSelectNewQuote };
+export { selectAddQuote, makeSelectNewQuote };

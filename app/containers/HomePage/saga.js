@@ -4,10 +4,10 @@
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { ADD_QUOTE, GET_QUOTES } from 'containers/App/constants';
-import { repoLoadingError, quotesLoaded } from 'containers/App/actions';
+import { quoteLoadingError, quotesLoaded } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { makeSelectNewQuote } from 'containers/HomePage/selectors';
+import { makeSelectNewQuote } from 'containers/AddQuotePage/selectors';
 import { resetNewQuote } from '../AddQuotePage/actions';
 
 const REQUEST_URL = `http://localhost:3001/quotes`;
@@ -18,7 +18,6 @@ export function* requestAddQuote() {
   // Select newQuote from store
   const newQuote = yield select(makeSelectNewQuote());
 
-  // console.log('requestAddQuote ran, newQuote .........', newQuote);
   if (newQuote && newQuote.trim().length > 0) {
     try {
       // Call our request helper (see 'utils/request')
@@ -30,11 +29,10 @@ export function* requestAddQuote() {
         body: JSON.stringify({ newQuote }),
       };
       const quotes = yield call(request, REQUEST_URL, req);
-      // console.log('quotes.quotes after POST req====', quotes.quotes);
       yield put(quotesLoaded(quotes.quotes));
       yield put(resetNewQuote());
     } catch (err) {
-      yield put(repoLoadingError(err));
+      yield put(quoteLoadingError(err));
     }
   }
 }
@@ -49,7 +47,7 @@ export function* requestGetQuotes() {
     console.log('quotes after api call====', quotes);
     yield put(quotesLoaded(quotes.quotes));
   } catch (err) {
-    yield put(repoLoadingError(err));
+    yield put(quoteLoadingError(err));
   }
 }
 
@@ -57,7 +55,7 @@ export function* requestGetQuotes() {
  * Root saga manages watcher lifecycle
  */
 export default function* watcherSaga() {
-  // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
+  // Watches for GET_QUOTES actions and calls getQuotes when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount

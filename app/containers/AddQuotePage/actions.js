@@ -1,5 +1,5 @@
 /*
- * Home Actions
+ * AddQuote Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,

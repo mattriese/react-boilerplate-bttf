@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectLoading,
@@ -22,20 +21,15 @@ import QuotesList from 'components/QuotesList';
 import CenteredSection from './CenteredSection';
 import Section from './Section';
 import { getQuotes } from '../App/actions';
-import { makeSelectNewQuote } from '../AddQuotePage/selectors';
-import reducer from '../AddQuotePage/reducer';
 import saga from './saga';
 
 const key = 'home';
 
 export function HomePage({ quotes, loading, error, populateQuotesList }) {
-  useInjectReducer({ key, reducer });
+  // useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  // console.log('quotes in homepage (props) ===--===', quotes);
-
   useEffect(() => {
-    console.log('populate useEffect ran');
     populateQuotesList();
   }, []);
 
@@ -44,7 +38,6 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
     error,
     quotes,
   };
-  console.log('quotesListProps in homepage/index0000000', quotesListProps);
 
   return (
     <article>
@@ -74,7 +67,6 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  newQuote: makeSelectNewQuote(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
   quotes: makeSelectQuotes(),

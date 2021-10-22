@@ -1,43 +1,47 @@
-import { LOAD_REPOS, LOAD_REPOS_SUCCESS, LOAD_REPOS_ERROR } from '../constants';
+import {
+  GET_QUOTES,
+  LOAD_QUOTES_SUCCESS,
+  LOAD_QUOTES_ERROR,
+} from '../constants';
 
-import { loadRepos, reposLoaded, repoLoadingError } from '../actions';
+import { getQuotes, quotesLoaded, quoteLoadingError } from '../actions';
 
 describe('App Actions', () => {
-  describe('loadRepos', () => {
+  describe('getQuotes', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: LOAD_REPOS,
+        type: GET_QUOTES,
       };
 
-      expect(loadRepos()).toEqual(expectedResult);
+      expect(getQuotes()).toEqual(expectedResult);
     });
   });
 
-  describe('reposLoaded', () => {
+  describe('quotesLoaded', () => {
     it('should return the correct type and the passed repos', () => {
       const fixture = ['Test'];
       const newQuote = 'test';
       const expectedResult = {
-        type: LOAD_REPOS_SUCCESS,
+        type: LOAD_QUOTES_SUCCESS,
         repos: fixture,
         newQuote,
       };
 
-      expect(reposLoaded(fixture, newQuote)).toEqual(expectedResult);
+      expect(quotesLoaded(fixture, newQuote)).toEqual(expectedResult);
     });
   });
 
-  describe('repoLoadingError', () => {
+  describe('quoteLoadingError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: LOAD_REPOS_ERROR,
+        type: LOAD_QUOTES_ERROR,
         error: fixture,
       };
 
-      expect(repoLoadingError(fixture)).toEqual(expectedResult);
+      expect(quoteLoadingError(fixture)).toEqual(expectedResult);
     });
   });
 });
