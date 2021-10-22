@@ -45,7 +45,7 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
     error,
     quotes,
   };
-  // console.log('reposListProps in homepage/index0000000', reposListProps);
+  console.log('reposListProps in homepage/index0000000', reposListProps);
 
   return (
     <article>

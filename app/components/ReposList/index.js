@@ -8,6 +8,8 @@ import RepoListItem from 'containers/RepoListItem';
 
 function ReposList({ loading, error, quotes }) {
   console.log('quotes in Repos list (prop)=-=-=', quotes);
+  console.log('loading in Repos list (prop)=-=-=', loading);
+  console.log('error in Repos list (prop)=-=-=', error);
   if (loading) {
     return <List component={LoadingIndicator} />;
   }

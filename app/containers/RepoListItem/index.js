@@ -26,7 +26,7 @@ export function RepoListItem(props) {
   );
 
   // Render the content into a list item
-  return <ListItem key={`repo-list-item-${uuidv4()}`} quote={content} />;
+  return <ListItem key={`repo-list-item-${uuidv4()}`} item={content} />;
 }
 
 RepoListItem.propTypes = {

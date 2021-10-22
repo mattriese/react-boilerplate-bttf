@@ -11,7 +11,6 @@ import NavBar from './NavBar';
 import HeaderLink from './HeaderLink';
 
 function Header({ location }) {
-  console.log('locaiton in Header---', location);
   return (
     <div>
       <Img src={Banner} alt="Back to the Future - Logo" />

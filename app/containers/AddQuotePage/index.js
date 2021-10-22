@@ -56,7 +56,6 @@ export function mapDispatchToProps(dispatch) {
   return {
     onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
     onSubmitForm: evt => {
-      console.log('evt in onsubmitForm====', evt);
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       // console.log('evt.target.value===', evt.target.value);
       // console.log('username in onsubmitform===', username);

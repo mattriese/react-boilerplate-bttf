@@ -97,6 +97,7 @@ export function reposLoaded(repos, username) {
  * @return {object}       An action object with a type of LOAD_REPOS_ERROR passing the error
  */
 export function repoLoadingError(error) {
+  console.log('repoLoadingError ran, error:::::::::', error);
   return {
     type: LOAD_REPOS_ERROR,
     error,
