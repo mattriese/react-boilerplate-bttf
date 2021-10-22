@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  makeSelectRepos,
+  // makeSelectRepos,
   makeSelectLoading,
   makeSelectError,
   makeSelectQuotes,
@@ -75,7 +75,7 @@ HomePage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
+  // repos: makeSelectRepos(),
   newQuote: makeSelectNewQuote(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
