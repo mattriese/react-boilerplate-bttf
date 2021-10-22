@@ -23,7 +23,7 @@ import ReposList from 'components/ReposList';
 import CenteredSection from './CenteredSection';
 import Section from './Section';
 import { getQuotes } from '../App/actions';
-import { makeSelectUsername } from '../AddQuotePage/selectors';
+import { makeSelectNewQuote } from '../AddQuotePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -76,7 +76,7 @@ HomePage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
-  username: makeSelectUsername(),
+  newQuote: makeSelectNewQuote(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
   quotes: makeSelectQuotes(),

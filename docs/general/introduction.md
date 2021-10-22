@@ -136,15 +136,15 @@ Reselect is a library used for slicing your redux state and providing only the r
 2.  Memoization
 3.  Composability
 
-Imagine an application that shows a list of users. Its redux state tree stores an array of usernames with signatures:
+Imagine an application that shows a list of users. Its redux state tree stores an array of newQuotes with signatures:
 
-`{ id: number, username: string, gender: string, age: number }`.
+`{ id: number, newQuote: string, gender: string, age: number }`.
 
 Let's see how the three features of reselect help.
 
-- **Computation:** While performing a search operation, reselect will filter the original array and return only matching usernames. Redux state does not have to store a separate array of filtered usernames.
+- **Computation:** While performing a search operation, reselect will filter the original array and return only matching newQuotes. Redux state does not have to store a separate array of filtered newQuotes.
 - **Memoization:** A selector will not compute a new result unless one of its arguments change. That means, if you are repeating the same search once again, reselect will not filter the array over and over. It will just return the previously computed, and subsequently cached, result. Reselect compares the old and the new arguments and then decides whether to compute again or return the cached result.
-- **Composability:** You can combine multiple selectors. For example, one selector can filter usernames according to a search key and another selector can filter the already filtered array according to gender. One more selector can further filter according to age. You combine these selectors by using `createSelector()`
+- **Composability:** You can combine multiple selectors. For example, one selector can filter newQuotes according to a search key and another selector can filter the already filtered array according to gender. One more selector can further filter according to age. You combine these selectors by using `createSelector()`
 
 ### Redux Saga
 
@@ -176,19 +176,19 @@ The react-boilerplate building blocks interoperate to produce a seamless applica
 
 ### Workflow
 
-The example application is a simple service which shows a list of repositories for GitHub users using GitHub's public API. You type in a username and the application will show you a list of repositories for that user. It also shows how navigating away to a different route can be done. You can switch between English and German by selecting the desired option from the menu in the footer.
+The example application is a simple service which shows a list of repositories for GitHub users using GitHub's public API. You type in a newQuote and the application will show you a list of repositories for that user. It also shows how navigating away to a different route can be done. You can switch between English and German by selecting the desired option from the menu in the footer.
 
 #### `<HomePage />`
 
 Run `npm start` to launch the application. If you start browsing at [https://localhost:3000](https://localhost:3000), by default you will be navigated to the home page. Here, notice that route is `"/"`, so the [`<HomePage />`](https://github.com/react-boilerplate/react-boilerplate/blob/master/app/containers/HomePage/index.js) container will be mounted. It is responsible for rendering a form with a textbox and a list of repositories.
 
-- `mapDispatchToProps()`: Generally, we provide outgoing action creators (functions that create [action](http://redux.js.org/docs/basics/Actions.html) objects) to the react component through this method. Notice that for every keypress in textbox, your state will be updated by dispatching a `changeUsername` action to the store. So at any point in time, your Redux state will hold the currently typed username. When you submit the form, another action, `loadRepos` will be dispatched.
+- `mapDispatchToProps()`: Generally, we provide outgoing action creators (functions that create [action](http://redux.js.org/docs/basics/Actions.html) objects) to the react component through this method. Notice that for every keypress in textbox, your state will be updated by dispatching a `changeNewQuote` action to the store. So at any point in time, your Redux state will hold the currently typed newQuote. When you submit the form, another action, `loadRepos` will be dispatched.
 
-- `mapStateToProps()`: Generally, we provide incoming state from the Redux store to the react component through this method. Notice that we do not provide the entire state to the component, simply because we don't want the react component to have access to irrelevant data. The state will be filtered by selectors such as `selectRepos`, `selectUsername`, etc.
+- `mapStateToProps()`: Generally, we provide incoming state from the Redux store to the react component through this method. Notice that we do not provide the entire state to the component, simply because we don't want the react component to have access to irrelevant data. The state will be filtered by selectors such as `selectRepos`, `selectNewQuote`, etc.
 
 Together these two methods work like magic. When you type something in the textbox the following things will happen in a sequential manner:
 
-1.  `changeUsername()` will send text to the Redux store. The text can be accessed using `evt.target.value`. Here, `evt` is the `onChange` event emitted by pressing a key.
+1.  `changeNewQuote()` will send text to the Redux store. The text can be accessed using `evt.target.value`. Here, `evt` is the `onChange` event emitted by pressing a key.
 2.  The Redux store will consult with its corresponding reducer, since a reducer knows what to do with the data.
 3.  When a reducer computes a new state tree, the store will update its state with the newly typed data.
 4.  An update has occured in the state, therefore `mapStateToProps()` will be triggered and your react component will get the new data.

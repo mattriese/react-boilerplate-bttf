@@ -20,13 +20,13 @@ describe('selectGlobal', () => {
 describe('makeSelectCurrentUser', () => {
   const currentUserSelector = makeSelectCurrentUser();
   it('should select the current user', () => {
-    const username = 'mxstbr';
+    const newQuote = 'mxstbr';
     const mockedState = {
       global: {
-        currentUser: username,
+        currentUser: newQuote,
       },
     };
-    expect(currentUserSelector(mockedState)).toEqual(username);
+    expect(currentUserSelector(mockedState)).toEqual(newQuote);
   });
 });
 

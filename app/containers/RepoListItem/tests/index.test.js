@@ -36,7 +36,7 @@ describe('<RepoListItem />', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('should not render the current username', () => {
+  it('should not render the current newQuote', () => {
     const { queryByText } = renderComponent({
       item,
       currentUser: item.owner.login,
@@ -44,7 +44,7 @@ describe('<RepoListItem />', () => {
     expect(queryByText(item.owner.login)).toBeNull();
   });
 
-  it('should render usernames that are not the current one', () => {
+  it('should render newQuotes that are not the current one', () => {
     const { container } = renderComponent({
       item,
       currentUser: 'nikgraf',

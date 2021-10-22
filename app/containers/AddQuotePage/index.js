@@ -14,10 +14,10 @@ import H2 from 'components/H2';
 import Form from './Form';
 import Input from './Input';
 import { addQuote } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+import { changeNewQuote } from './actions';
+import { makeSelectNewQuote } from './selectors';
 
-export function AddQuotePage({ onSubmitForm, onChangeUsername, username }) {
+export function AddQuotePage({ onSubmitForm, onChangeNewQuote, newQuote }) {
   return (
     <div>
       <Helmet>
@@ -28,13 +28,13 @@ export function AddQuotePage({ onSubmitForm, onChangeUsername, username }) {
         Add a <i>Back to the Future</i> quote:
       </H2>
       <Form onSubmit={onSubmitForm}>
-        <label htmlFor="username">
+        <label htmlFor="newQuote">
           <Input
-            id="username"
+            id="newQuote"
             type="text"
             placeholder="This is heavy, Doc"
-            value={username}
-            onChange={onChangeUsername}
+            value={newQuote}
+            onChange={onChangeNewQuote}
           />
         </label>
       </Form>
@@ -44,21 +44,21 @@ export function AddQuotePage({ onSubmitForm, onChangeUsername, username }) {
 
 AddQuotePage.propTypes = {
   onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  newQuote: PropTypes.string,
+  onChangeNewQuote: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  username: makeSelectUsername(),
+  newQuote: makeSelectNewQuote(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
+    onChangeNewQuote: evt => dispatch(changeNewQuote(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       // console.log('evt.target.value===', evt.target.value);
-      // console.log('username in onsubmitform===', username);
+      // console.log('newQuote in onsubmitform===', newQuote);
       dispatch(addQuote());
     },
   };

@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 
 import { HomePage, mapDispatchToProps } from '../index';
-import { changeUsername } from '../actions';
+import { changeNewQuote } from '../actions';
 import { loadRepos } from '../../App/actions';
 import configureStore from '../../../configureStore';
 
@@ -33,14 +33,14 @@ describe('<HomePage />', () => {
     expect(firstChild).toMatchSnapshot();
   });
 
-  it('should fetch the repos on mount if a username exists', () => {
+  it('should fetch the repos on mount if a newQuote exists', () => {
     const submitSpy = jest.fn();
     render(
       <Provider store={store}>
         <IntlProvider locale="en">
           <HomePage
-            username="Not Empty"
-            onChangeUsername={() => {}}
+            newQuote="Not Empty"
+            onChangeNewQuote={() => {}}
             onSubmitForm={submitSpy}
           />
         </IntlProvider>
@@ -49,26 +49,26 @@ describe('<HomePage />', () => {
     expect(submitSpy).toHaveBeenCalled();
   });
 
-  it('should not call onSubmitForm if username is an empty string', () => {
+  it('should not call onSubmitForm if newQuote is an empty string', () => {
     const submitSpy = jest.fn();
     render(
       <Provider store={store}>
         <IntlProvider locale="en">
-          <HomePage onChangeUsername={() => {}} onSubmitForm={submitSpy} />
+          <HomePage onChangeNewQuote={() => {}} onSubmitForm={submitSpy} />
         </IntlProvider>
       </Provider>,
     );
     expect(submitSpy).not.toHaveBeenCalled();
   });
 
-  it('should not call onSubmitForm if username is null', () => {
+  it('should not call onSubmitForm if newQuote is null', () => {
     const submitSpy = jest.fn();
     render(
       <Provider store={store}>
         <IntlProvider locale="en">
           <HomePage
-            username=""
-            onChangeUsername={() => {}}
+            newQuote=""
+            onChangeNewQuote={() => {}}
             onSubmitForm={submitSpy}
           />
         </IntlProvider>
@@ -78,19 +78,19 @@ describe('<HomePage />', () => {
   });
 
   describe('mapDispatchToProps', () => {
-    describe('onChangeUsername', () => {
+    describe('onChangeNewQuote', () => {
       it('should be injected', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        expect(result.onChangeUsername).toBeDefined();
+        expect(result.onChangeNewQuote).toBeDefined();
       });
 
-      it('should dispatch changeUsername when called', () => {
+      it('should dispatch changeNewQuote when called', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        const username = 'mxstbr';
-        result.onChangeUsername({ target: { value: username } });
-        expect(dispatch).toHaveBeenCalledWith(changeUsername(username));
+        const newQuote = 'mxstbr';
+        result.onChangeNewQuote({ target: { value: newQuote } });
+        expect(dispatch).toHaveBeenCalledWith(changeNewQuote(newQuote));
       });
     });
 

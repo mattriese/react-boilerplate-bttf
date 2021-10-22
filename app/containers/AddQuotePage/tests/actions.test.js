@@ -1,17 +1,17 @@
-import { CHANGE_USERNAME } from '../../HomePage/constants';
+import { CHANGE_NEWQUOTE } from '../../HomePage/constants';
 
-import { changeUsername } from '../actions';
+import { changeNewQuote } from '../actions';
 
 describe('Home Actions', () => {
-  describe('changeUsername', () => {
+  describe('changeNewQuote', () => {
     it('should return the correct type and the passed name', () => {
       const fixture = 'Max';
       const expectedResult = {
-        type: CHANGE_USERNAME,
-        username: fixture,
+        type: CHANGE_NEWQUOTE,
+        newQuote: fixture,
       };
 
-      expect(changeUsername(fixture)).toEqual(expectedResult);
+      expect(changeNewQuote(fixture)).toEqual(expectedResult);
     });
   });
 });

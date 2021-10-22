@@ -39,7 +39,7 @@ const appReducer = (state = initialState, action) =>
       case LOAD_REPOS_SUCCESS:
         draft.quotes = action.repos;
         draft.loading = false;
-        draft.currentUser = action.username;
+        draft.currentUser = action.newQuote;
         break;
 
       case LOAD_REPOS_ERROR:

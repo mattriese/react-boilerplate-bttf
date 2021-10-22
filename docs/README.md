@@ -49,7 +49,7 @@
 
 1.  Open [localhost:3000](http://localhost:3000) to see it in action.
 
-    - Add a Github username to see Redux and Redux Sagas in action: effortless
+    - Add a Github newQuote to see Redux and Redux Sagas in action: effortless
       async state updates and side effects are now yours :)
     - Edit the file at `./app/components/Header/index.js` so that the text of
       the `<Button>` component reads "Features!!!"... [Hot Module Reloading](https://webpack.js.org/guides/hot-module-replacement/) gives

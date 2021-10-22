@@ -16,14 +16,14 @@ describe('App Actions', () => {
   describe('reposLoaded', () => {
     it('should return the correct type and the passed repos', () => {
       const fixture = ['Test'];
-      const username = 'test';
+      const newQuote = 'test';
       const expectedResult = {
         type: LOAD_REPOS_SUCCESS,
         repos: fixture,
-        username,
+        newQuote,
       };
 
-      expect(reposLoaded(fixture, username)).toEqual(expectedResult);
+      expect(reposLoaded(fixture, newQuote)).toEqual(expectedResult);
     });
   });
 

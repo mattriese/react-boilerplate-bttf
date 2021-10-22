@@ -1,14 +1,14 @@
 import produce from 'immer';
 
 import homeReducer from '../reducer';
-import { changeUsername } from '../actions';
+import { changeNewQuote } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('homeReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      username: '',
+      newQuote: '',
     };
   });
 
@@ -17,12 +17,12 @@ describe('homeReducer', () => {
     expect(homeReducer(undefined, {})).toEqual(expectedResult);
   });
 
-  it('should handle the changeUsername action correctly', () => {
+  it('should handle the changeNewQuote action correctly', () => {
     const fixture = 'mxstbr';
     const expectedResult = produce(state, draft => {
-      draft.username = fixture;
+      draft.newQuote = fixture;
     });
 
-    expect(homeReducer(state, changeUsername(fixture))).toEqual(expectedResult);
+    expect(homeReducer(state, changeNewQuote(fixture))).toEqual(expectedResult);
   });
 });

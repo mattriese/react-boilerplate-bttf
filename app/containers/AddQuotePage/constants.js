@@ -9,5 +9,5 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
-export const RESET_USERNAME = 'boilerplate/Home/RESET_USERNAME';
+export const CHANGE_NEWQUOTE = 'boilerplate/Home/CHANGE_NEWQUOTE';
+export const RESET_NEWQUOTE = 'boilerplate/Home/RESET_NEWQUOTE';

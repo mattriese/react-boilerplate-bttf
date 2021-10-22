@@ -8,23 +8,23 @@
  */
 
 import produce from 'immer';
-import { CHANGE_USERNAME, RESET_USERNAME } from './constants';
+import { CHANGE_NEWQUOTE, RESET_NEWQUOTE } from './constants';
 
 // The initial state of the App
 export const initialState = {
-  username: '',
+  newQuote: '',
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const homeReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case CHANGE_USERNAME:
-        // Delete prefixed '@' from the github username
-        draft.username = action.username.replace(/@/gi, '');
+      case CHANGE_NEWQUOTE:
+        // Delete prefixed '@' from the github newQuote
+        draft.newQuote = action.newQuote.replace(/@/gi, '');
         break;
-      case RESET_USERNAME:
-        draft.username = '';
+      case RESET_NEWQUOTE:
+        draft.newQuote = '';
         break;
     }
   });

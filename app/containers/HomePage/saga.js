@@ -11,17 +11,16 @@ import {
 } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { makeSelectUsername } from 'containers/HomePage/selectors';
-import { resetUsername } from '../AddQuotePage/actions';
+import { makeSelectNewQuote } from 'containers/HomePage/selectors';
+import { resetNewQuote } from '../AddQuotePage/actions';
 
 const REQUEST_URL = `http://localhost:3001/quotes`;
 /**
  * Quotes request/response handler
  */
 export function* requestAddQuote() {
-  // Select username from store
-  const username = yield select(makeSelectUsername());
-  const newQuote = username;
+  // Select newQuote from store
+  const newQuote = yield select(makeSelectNewQuote());
 
   // console.log('requestAddQuote ran, newQuote .........', newQuote);
   if (newQuote && newQuote.trim().length > 0) {
@@ -36,8 +35,8 @@ export function* requestAddQuote() {
       };
       const quotes = yield call(request, REQUEST_URL, req);
       // console.log('quotes.quotes after POST req====', quotes.quotes);
-      yield put(reposLoaded(quotes.quotes, username));
-      yield put(resetUsername());
+      yield put(reposLoaded(quotes.quotes, newQuote));
+      yield put(resetNewQuote());
     } catch (err) {
       yield put(repoLoadingError(err));
     }

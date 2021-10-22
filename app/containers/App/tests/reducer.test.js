@@ -38,14 +38,14 @@ describe('appReducer', () => {
         name: 'My Repo',
       },
     ];
-    const username = 'test';
+    const newQuote = 'test';
     const expectedResult = produce(state, draft => {
       draft.userData.repositories = fixture;
       draft.loading = false;
-      draft.currentUser = username;
+      draft.currentUser = newQuote;
     });
 
-    expect(appReducer(state, reposLoaded(fixture, username))).toEqual(
+    expect(appReducer(state, reposLoaded(fixture, newQuote))).toEqual(
       expectedResult,
     );
   });
