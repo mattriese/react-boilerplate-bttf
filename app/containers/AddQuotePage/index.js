@@ -3,7 +3,7 @@
  *
  * List all the features
  */
-import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
@@ -18,12 +18,6 @@ import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 
 export function AddQuotePage({ onSubmitForm, onChangeUsername, username }) {
-  useEffect(() => {
-    console.log('XXXXXXXXX onsubmit useEffect ran');
-    // When initial state username is not null, submit the form to load repos
-    if (username && username.trim().length > 0) onSubmitForm();
-  }, []);
-
   return (
     <div>
       <Helmet>
@@ -62,6 +56,7 @@ export function mapDispatchToProps(dispatch) {
   return {
     onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
     onSubmitForm: evt => {
+      console.log('evt in onsubmitForm====', evt);
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       // console.log('evt.target.value===', evt.target.value);
       // console.log('username in onsubmitform===', username);

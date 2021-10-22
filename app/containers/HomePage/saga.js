@@ -23,23 +23,24 @@ export function* requestAddQuote() {
   const username = yield select(makeSelectUsername());
   const newQuote = username;
   const requestURL = `http://localhost:3001/quotes`;
-  console.log('requestAddQuote ran, newQuote .........', newQuote);
-  try {
-    // Call our request helper (see 'utils/request')
-    const req = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ newQuote }),
-    };
-    const quotes = yield call(request, requestURL, req);
-    console.log('quotes.quotes after POST req====', quotes.quotes);
-    // const repos = ['oops', 'scott', 'Marty', 'this', 'heavy'];
-    yield put(reposLoaded(quotes.quotes, username));
-    yield put(resetUsername());
-  } catch (err) {
-    yield put(repoLoadingError(err));
+  // console.log('requestAddQuote ran, newQuote .........', newQuote);
+  if (newQuote && newQuote.trim().length > 0) {
+    try {
+      // Call our request helper (see 'utils/request')
+      const req = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ newQuote }),
+      };
+      const quotes = yield call(request, requestURL, req);
+      // console.log('quotes.quotes after POST req====', quotes.quotes);
+      yield put(reposLoaded(quotes.quotes, username));
+      yield put(resetUsername());
+    } catch (err) {
+      yield put(repoLoadingError(err));
+    }
   }
 }
 
