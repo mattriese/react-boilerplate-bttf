@@ -16,7 +16,6 @@ const uuidv4 = require('uuid/v4');
 
 export function QuoteListItem(props) {
   const { quote } = props;
-  console.log('quote in QuoteListItem:  ----- ', quote);
 
   // Put together the content of the repository
   const content = (

@@ -25,7 +25,6 @@ const REQUEST_URL = `http://localhost:3001/quotes`;
 export function* requestAddQuote() {
   // Select newQuote from store
   const newQuote = yield select(makeSelectNewQuote());
-  // const notify = () => toast('Wow so easy !');
   // Ideally this form validation would be in the form submit handler
   if (newQuote && newQuote.trim().length > 0) {
     try {
@@ -42,7 +41,6 @@ export function* requestAddQuote() {
       yield put(resetNewQuote());
       yield put(push('/'));
     } catch (err) {
-      console.log('error in requestADD', err);
       yield put(quoteLoadingError(err.message));
     }
   }

@@ -42,7 +42,6 @@ export function HomePage({
   }, []);
 
   useEffect(() => {
-    console.log('reset success!!!!!');
     if (success) {
       swal(
         <div>

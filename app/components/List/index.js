@@ -8,7 +8,6 @@ const uuidv4 = require('uuid/v4');
 function List(props) {
   const ComponentToRender = props.component;
   let content = <div />;
-  console.log('List:::: props.quotes', props.quotes);
   // If we have items, render them
   if (props.quotes) {
     content = props.quotes.map(quote => (

@@ -34,8 +34,6 @@ export function changeNewQuote(newQuote) {
 /**
  * Resets the input field of the form
  *
- * @param  {string} newQuote The new text of the input field
- *
  * @return {object} An action object with a type of RESET_NEWQUOTE
  */
 export function resetNewQuote() {

@@ -32,8 +32,6 @@ export function AddQuotePage({
 }) {
   useInjectReducer({ key, reducer });
 
-  console.log('AddQuotePage rendered, error----', error);
-
   useEffect(() => {
     if (error) {
       swal(

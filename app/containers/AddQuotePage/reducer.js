@@ -22,6 +22,7 @@ const addQuoteReducer = (state = initialState, action) =>
       case CHANGE_NEWQUOTE:
         draft.newQuote = action.newQuote;
         break;
+
       case RESET_NEWQUOTE:
         draft.newQuote = '';
         break;

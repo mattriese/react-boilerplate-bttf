@@ -38,7 +38,7 @@ export function addQuote() {
 
 /**
  * Dispatched by worker saga after api loads default quotes
- * @returns {object}      An action object with a type of ??? passing the quotes
+ * @returns {object}      An action object with a type of GET_QUOTES passing the quotes
  */
 export function getQuotes() {
   return {
@@ -62,6 +62,8 @@ export function quotesLoaded(quotes) {
 
 /**
  * Dispatched when the api responds that newQuote was saved to backend
+ *
+ * @param  {string} savedQuote the recently saved quote
  *
  * @return {object}      An action object with a type of LOAD_QUOTES_SUCCESS passing the quotes
  */
@@ -89,7 +91,7 @@ export function quoteLoadingError(error) {
 /**
  * Change success to false
  *
- * @return {object}       An action object with a type of LOAD_QUOTES_ERROR passing the error
+ * @return {object}       An action object with a type of RESET_SUCCESS passing the error
  */
 export function resetSuccess() {
   return {
