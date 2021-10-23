@@ -1,24 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`getRepos Saga should call the repoLoadingError action if the response errors 1`] = `
-Object {
-  "@@redux-saga/IO": true,
-  "combinator": false,
-  "payload": Object {
-    "args": Array [],
-    "selector": [Function],
-  },
-  "type": "SELECT",
-}
-`;
-
-exports[`getRepos Saga should call the repoLoadingError action if the response errors 2`] = `
+exports[`requestGetQuotes Saga should call the repoLoadingError action if the response errors 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "https://api.github.com/users/mxstbr/repos?type=all&sort=updated",
+      "http://localhost:3001/quotes",
     ],
     "context": null,
     "fn": [Function],
@@ -27,29 +15,47 @@ Object {
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 1`] = `
+exports[`requestGetQuotes Saga should call the repoLoadingError action if the response errors 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
-    "args": Array [],
-    "selector": [Function],
+    "action": Object {
+      "quotes": undefined,
+      "type": "boilerplate/App/LOAD_QUOTES_SUCCESS",
+    },
+    "channel": undefined,
   },
-  "type": "SELECT",
+  "type": "PUT",
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 2`] = `
+exports[`requestGetQuotes Saga should dispatch the reposLoaded action if it requests the data successfully 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "combinator": false,
   "payload": Object {
     "args": Array [
-      "https://api.github.com/users/mxstbr/repos?type=all&sort=updated",
+      "http://localhost:3001/quotes",
     ],
     "context": null,
     "fn": [Function],
   },
   "type": "CALL",
+}
+`;
+
+exports[`requestGetQuotes Saga should dispatch the reposLoaded action if it requests the data successfully 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "combinator": false,
+  "payload": Object {
+    "action": Object {
+      "quotes": undefined,
+      "type": "boilerplate/App/LOAD_QUOTES_SUCCESS",
+    },
+    "channel": undefined,
+  },
+  "type": "PUT",
 }
 `;
