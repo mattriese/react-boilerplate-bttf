@@ -10,27 +10,48 @@ import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import swal from '@sweetalert/with-react';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectLoading,
   makeSelectError,
   makeSelectQuotes,
+  makeSelectSuccess,
 } from 'containers/App/selectors';
 import QuotesList from 'components/QuotesList';
 import CenteredSection from './CenteredSection';
 import Section from './Section';
-import { getQuotes } from '../App/actions';
+import { getQuotes, resetSuccess } from '../App/actions';
 import saga from './saga';
 
 const key = 'home';
 
-export function HomePage({ quotes, loading, error, populateQuotesList }) {
-  // useInjectReducer({ key, reducer });
+export function HomePage({
+  quotes,
+  loading,
+  error,
+  populateQuotesList,
+  success,
+  resetSuccessState,
+}) {
   useInjectSaga({ key, saga });
 
   useEffect(() => {
     if (!quotes || quotes.length === 0) populateQuotesList();
+  }, []);
+
+  useEffect(() => {
+    console.log('reset success!!!!!');
+    if (success) {
+      swal(
+        <div>
+          <h1>Success!</h1>
+          <p>Your new quote has been added to the list!</p>
+        </div>,
+      );
+      resetSuccessState();
+    }
   }, []);
 
   const quotesListProps = {
@@ -60,21 +81,25 @@ export function HomePage({ quotes, loading, error, populateQuotesList }) {
 }
 
 HomePage.propTypes = {
+  success: PropTypes.bool,
   quotes: PropTypes.array,
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   populateQuotesList: PropTypes.func,
+  resetSuccessState: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loading: makeSelectLoading(),
   error: makeSelectError(),
   quotes: makeSelectQuotes(),
+  success: makeSelectSuccess(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
     populateQuotesList: () => dispatch(getQuotes()),
+    resetSuccessState: () => dispatch(resetSuccess()),
   };
 }
 

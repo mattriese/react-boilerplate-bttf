@@ -3,26 +3,49 @@
  *
  * List all the features
  */
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import swal from '@sweetalert/with-react';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import H2 from 'components/H2';
 import Form from './Form';
 import Input from './Input';
-import { addQuote } from '../App/actions';
+import { addQuote, resetError } from '../App/actions';
 import { changeNewQuote } from './actions';
 import { makeSelectNewQuote } from './selectors';
+import { makeSelectError } from '../App/selectors';
 import reducer from './reducer';
 
 const key = 'AddQuote';
 
-export function AddQuotePage({ onSubmitForm, onChangeNewQuote, newQuote }) {
+export function AddQuotePage({
+  onSubmitForm,
+  onChangeNewQuote,
+  newQuote,
+  resetErrorState,
+  error,
+}) {
   useInjectReducer({ key, reducer });
+
+  console.log('AddQuotePage rendered, error----', error);
+
+  useEffect(() => {
+    if (error) {
+      swal(
+        <div>
+          <h1>Error</h1>
+          <p>{error}</p>
+        </div>,
+      );
+      resetErrorState();
+    }
+  }, [error]);
+
   return (
     <div>
       <Helmet>
@@ -51,10 +74,13 @@ AddQuotePage.propTypes = {
   onSubmitForm: PropTypes.func,
   newQuote: PropTypes.string,
   onChangeNewQuote: PropTypes.func,
+  error: PropTypes.string,
+  resetErrorState: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   newQuote: makeSelectNewQuote(),
+  error: makeSelectError(),
 });
 
 export function mapDispatchToProps(dispatch) {
@@ -66,6 +92,7 @@ export function mapDispatchToProps(dispatch) {
       // console.log('newQuote in onsubmitform===', newQuote);
       dispatch(addQuote());
     },
+    resetErrorState: () => dispatch(resetError()),
   };
 }
 

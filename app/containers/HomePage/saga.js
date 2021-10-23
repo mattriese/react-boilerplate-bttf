@@ -1,24 +1,32 @@
 /**
- * Gets the list of quotes from the server
+ * Gets the list of quotes from the server and updates the list on form submission
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { ADD_QUOTE, GET_QUOTES } from 'containers/App/constants';
-import { quoteLoadingError, quotesLoaded } from 'containers/App/actions';
+import {
+  quoteLoadingError,
+  quotesLoaded,
+  newQuoteSaved,
+} from 'containers/App/actions';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 import request from 'utils/request';
 import { makeSelectNewQuote } from 'containers/AddQuotePage/selectors';
 import { resetNewQuote } from '../AddQuotePage/actions';
 
 const REQUEST_URL = `http://localhost:3001/quotes`;
+
 /**
- * Quotes request/response handler
+ * Calls api to add new quote
  */
 export function* requestAddQuote() {
   // Select newQuote from store
   const newQuote = yield select(makeSelectNewQuote());
-
+  // const notify = () => toast('Wow so easy !');
+  // Ideally this form validation would be in the form submit handler
   if (newQuote && newQuote.trim().length > 0) {
     try {
       // Call our request helper (see 'utils/request')
@@ -29,12 +37,13 @@ export function* requestAddQuote() {
         },
         body: JSON.stringify({ newQuote }),
       };
-      const quotes = yield call(request, REQUEST_URL, req);
-      yield put(quotesLoaded(quotes.quotes));
+      const response = yield call(request, REQUEST_URL, req);
+      yield put(newQuoteSaved(response.savedQuote));
       yield put(resetNewQuote());
       yield put(push('/'));
     } catch (err) {
-      yield put(quoteLoadingError(err));
+      console.log('error in requestADD', err);
+      yield put(quoteLoadingError(err.message));
     }
   }
 }
@@ -46,15 +55,14 @@ export function* requestGetQuotes() {
   try {
     // Call our request helper (see 'utils/request')
     const quotes = yield call(request, REQUEST_URL);
-    console.log('quotes after api call====', quotes);
     yield put(quotesLoaded(quotes.quotes));
   } catch (err) {
-    yield put(quoteLoadingError(err));
+    yield put(quoteLoadingError(err.message));
   }
 }
 
 /**
- * Root saga manages watcher lifecycle
+ * Watcher saga manages watcher lifecycle
  */
 export default function* watcherSaga() {
   // Watches for GET_QUOTES actions and calls getQuotes when one comes in.

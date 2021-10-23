@@ -20,6 +20,9 @@ import {
   ADD_QUOTE,
   LOAD_QUOTES_SUCCESS,
   LOAD_QUOTES_ERROR,
+  NEWQUOTE_SAVE_SUCCESS,
+  RESET_SUCCESS,
+  RESET_ERROR,
 } from './constants';
 
 /**
@@ -58,6 +61,18 @@ export function quotesLoaded(quotes) {
 }
 
 /**
+ * Dispatched when the api responds that newQuote was saved to backend
+ *
+ * @return {object}      An action object with a type of LOAD_QUOTES_SUCCESS passing the quotes
+ */
+export function newQuoteSaved(savedQuote) {
+  return {
+    type: NEWQUOTE_SAVE_SUCCESS,
+    savedQuote,
+  };
+}
+
+/**
  * Dispatched when loading the repositories fails
  *
  * @param  {object} error The error
@@ -68,5 +83,27 @@ export function quoteLoadingError(error) {
   return {
     type: LOAD_QUOTES_ERROR,
     error,
+  };
+}
+
+/**
+ * Change success to false
+ *
+ * @return {object}       An action object with a type of LOAD_QUOTES_ERROR passing the error
+ */
+export function resetSuccess() {
+  return {
+    type: RESET_SUCCESS,
+  };
+}
+
+/**
+ * Change error to false
+ *
+ * @return {object}       An action object with a type of RESET_ERROR passing the error
+ */
+export function resetError() {
+  return {
+    type: RESET_ERROR,
   };
 }
