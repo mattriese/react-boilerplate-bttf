@@ -13,6 +13,7 @@ import swal from '@sweetalert/with-react';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import H2 from 'components/H2';
+import SubmitButton from './SubmitButton';
 import Form from './Form';
 import Input from './Input';
 import { addQuote, resetError } from '../App/actions';
@@ -63,6 +64,7 @@ export function AddQuotePage({
             onChange={onChangeNewQuote}
           />
         </label>
+        <SubmitButton type="submit">submit</SubmitButton>
       </Form>
     </div>
   );
@@ -72,8 +74,8 @@ AddQuotePage.propTypes = {
   onSubmitForm: PropTypes.func,
   newQuote: PropTypes.string,
   onChangeNewQuote: PropTypes.func,
-  error: PropTypes.string,
-  resetErrorState: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  resetErrorState: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -83,10 +85,13 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeNewQuote: evt => dispatch(changeNewQuote(evt.target.value)),
+    onChangeNewQuote: evt => {
+      console.log('onChange: evt.target.value===', evt.target.value);
+      dispatch(changeNewQuote(evt.target.value));
+    },
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      // console.log('evt.target.value===', evt.target.value);
+      console.log('onSubmit: evt.target.value===', evt.target.value);
       // console.log('newQuote in onsubmitform===', newQuote);
       dispatch(addQuote());
     },

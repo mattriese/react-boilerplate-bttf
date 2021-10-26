@@ -27,7 +27,7 @@ function Header({ location }) {
 }
 
 Header.propTypes = {
-  location: PropTypes.string,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
